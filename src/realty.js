@@ -121,7 +121,7 @@ function handlerEditMode() {
 
   <div class='form-realty__input-block'>
     <label for="details" class='form-realty__label'>Опис об'єкту</label>
-    <textarea class='form-realty__input' name="realty-details" id="details"></textarea>
+    <textarea class='form-realty__input form-realty__input_big' name="realty-details" id="details"></textarea>
   </div>
 
   <div class='form-realty__input-block'>
