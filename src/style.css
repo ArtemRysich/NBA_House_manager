@@ -1,0 +1,16 @@
+.add-realty{
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+.add-realty_button{
+    width: 100%;
+}
+
+
+.form-realty{
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
