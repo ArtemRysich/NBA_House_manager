@@ -184,8 +184,10 @@ function createMarkup(arr) {
       ({ status, id, photo, price, area, title }) => `
       <li data-id="${id}" class="js-realty-item">
         <img src="${photo}" alt="${price}">
-        <h3>${price} $</h3>
-        <h2>${area} м<sup>2</sup></h2>
+        <h2>${title}</h2>
+        <h3>Ціна: ${price} $</h3>
+        <h3>Площа: ${area} м<sup>2</sup></h3>
+        <h3>Статус: ${status} $</h3>
     </li>`
     )
     .join('');
