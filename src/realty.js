@@ -13,38 +13,28 @@ function onClick() {
   const instance = basicLightbox.create(`
     <form action="submit" class="js-form-realty form-realty">
 
-
     <div class='form-realty__input-block form-realty__input-block_row'>
       <label for="photo" class='form-realty__label'>Завантажте фото об'єкту</label>
       <label for="photo" class='form-realty__image-btn'></label>
       <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
     </div>
-<<<<<<< HEAD
     <div class="js-form-realty__preview form-realty__preview"></div>
-=======
-    <div class="js-form-realty__preview"></div>
-
-    <div class='form-realty__input-block'>
-    <label for="text" class='form-realty__label'>Назва вашого об'єкта</label>
-    <input type="text" class='form-realty__input' name="realty-title" id="title">
-    </div>
-
->>>>>>> 2c64165c97cb450803d35b02e68e77b4d82dda40
     <div class='form-realty__input-block'>
       <label for="details" class='form-realty__label'>Опис об'єкту</label>
-      <textarea type="text" class='form-realty__input' name="realty-details" id="details"></textarea>
+      <input type="text" class='form-realty__input' name="realty-details" id="details">
     </div>
-
+    
     <div class='form-realty__input-block'>
       <label for="rooms" class='form-realty__label'>Кількість кімнат</label>
       <input type="number" class='form-realty__input' min="0" name="realty-rooms" id="rooms">
     </div>
+    
 
     <div class='form-realty__input-block'>
       <label for="area" class='form-realty__label'>Площа об'єкту м<sup>2</sup>;</label>
       <input type="number" class='form-realty__input' min="0" name="realty-area" id="area">
     </div>
-
+   
     <div class='form-realty__input-block'>
       <label for="price" class='form-realty__label'>Вартість об'єкту</label>
       <input type="number" class='form-realty__input' min="0" name="realty-price" id="price">
@@ -76,7 +66,7 @@ function renderImage(file) {
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    img = event.target.result;
+    img = event.target.result
     container.insertAdjacentHTML(
       'beforeend',
       `<img src="${img}" alt="preview">`
@@ -88,19 +78,17 @@ function renderImage(file) {
 
 function addRealty(evt) {
   evt.preventDefault();
-  const { title, details, rooms, area, price, type } =
+  const { photo, details, rooms, area, price, type } =
     evt.currentTarget.elements;
 
   const data = {
     id: uuidv4(),
-    title: title.value,
     photo: img,
     details: details.value,
     rooms: rooms.value,
     area: area.value,
     price: price.value,
     type: type.value,
-    status: type.value === 'Продаж' ? 'В продажі' : 'Вільно',
   };
   realtyItems.push(data);
   localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
@@ -117,13 +105,11 @@ function addRealty(evt) {
 function createMarkup(arr) {
   return arr
     .map(
-      ({ status, id, photo, price, area }) => `
+      ({ id, photo, price, area}) => `
       <li data-id="${id}">
         <img src="${photo}" alt="${price}">
-        <h2>${title}</h2>
-        <h2>Статус: ${status}</h2>
-        <h3>Ціна: ${price} $</h3>
-        <h2>Площа: ${area} м<sup>2</sup></h2>
+        <h3>${price} $</h3>
+        <h2>${area} м<sup>2</sup></h2>
     </li>`
     )
     .join('');

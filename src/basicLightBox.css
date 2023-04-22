@@ -1,0 +1,11 @@
+.basicLightbox--visible{
+    padding: 50px 20px;
+    display: grid;
+    overflow: auto;
+}
+
+.basicLightbox__placeholder{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
