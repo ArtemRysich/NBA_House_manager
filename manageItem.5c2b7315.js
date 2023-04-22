@@ -1,0 +1,2 @@
+const e=document.querySelector(".header"),t=document.querySelector(".header__burger"),s=document.querySelector(".header__nav");window.addEventListener("scroll",(()=>{pageYOffset>40&&!e.classList.contains("header_bg")?e.classList.add("active"):e.classList.remove("active")})),t.addEventListener("click",(()=>{t.classList.toggle("active"),s.classList.toggle("active")}));
+//# sourceMappingURL=manageItem.5c2b7315.js.map
