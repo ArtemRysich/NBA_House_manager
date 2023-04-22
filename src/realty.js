@@ -32,18 +32,17 @@ function onClick() {
       <label for="details" class='form-realty__label'>Опис об'єкту</label>
       <input type="text" class='form-realty__input' name="realty-details" id="details">
     </div>
-    
+
     <div class='form-realty__input-block'>
       <label for="rooms" class='form-realty__label'>Кількість кімнат</label>
       <input type="number" class='form-realty__input' min="0" name="realty-rooms" id="rooms">
     </div>
-    
 
     <div class='form-realty__input-block'>
       <label for="area" class='form-realty__label'>Площа об'єкту м<sup>2</sup>;</label>
       <input type="number" class='form-realty__input' min="0" name="realty-area" id="area">
     </div>
-   
+
     <div class='form-realty__input-block'>
       <label for="price" class='form-realty__label'>Вартість об'єкту</label>
       <input type="number" class='form-realty__input' min="0" name="realty-price" id="price">
@@ -57,7 +56,14 @@ function onClick() {
       </select>
     </div>
     <button class='form-realty__create'>Створити об'єкт</button>
-  </form>`);
+  </form>`, {
+    onShow: () => {
+      document.body.classList.add('lock');
+    },
+    onClose: () => {
+      document.body.classList.remove('lock');
+    }
+  });
 
   instance.show();
 
@@ -146,12 +152,18 @@ function createMarkup(arr) {
   return arr
     .map(
       ({ status, id, photo, price, area, title, type }) => `
-      <li data-id="${id}" class="js-realty-item">
-        <img src="${photo}" alt="${price}">
-        <h2>${title}</h2>
-        <h3>Ціна: ${price} $</h3>
-        <h3>Площа: ${area} м<sup>2</sup></h3>
-        <h3>Статус: ${status}</h3>
+      <li data-id="${id}" class="js-realty-item main-objects__item">
+        <div class='main-objects__body'>
+          <div class='main-objects__image'>
+            <img src="${photo}" alt="${price}">
+          </div>
+          <div class='main-objects__desc'>
+            <h2 class='main-objects__title'>${title}</h2>
+            <h3 class='main-objects__price'>Ціна: ${price} $</h3>
+            <h3 class='main-objects__square'>Площа: ${area} м<sup>2</sup></h3>
+            <h3 class='main-objects__status'>Статус: ${status}</h3>
+          </div>
+        </div>
     </li>`
     )
     .join('');
