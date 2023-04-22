@@ -1,11 +1,12 @@
 import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
-
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
 const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
 const list = document.querySelector('.js-list');
+let img = null;
+
 addRealtyBtn.addEventListener('click', onClick);
 
 function onClick() {
@@ -17,7 +18,7 @@ function onClick() {
       <label for="photo" class='form-realty__image-btn'></label>
       <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
     </div>
-    
+    <div class="js-form-realty__preview"></div>
     <div class='form-realty__input-block'>
       <label for="details" class='form-realty__label'>Опис об'єкту</label>
       <input type="text" class='form-realty__input' name="realty-details" id="details">
@@ -53,6 +54,26 @@ function onClick() {
 
   const form = document.querySelector('.js-form-realty');
   form.addEventListener('submit', addRealty.bind(instance));
+  form.photo.addEventListener('change', onLoad);
+}
+
+function onLoad() {
+  renderImage(this.files[0]);
+}
+
+function renderImage(file) {
+  const container = document.querySelector('.js-form-realty__preview');
+  const reader = new FileReader();
+
+  reader.onload = function (event) {
+    img = event.target.result
+    container.insertAdjacentHTML(
+      'beforeend',
+      `<img src="${img}" alt="preview">`
+    );
+  };
+
+  reader.readAsDataURL(file);
 }
 
 function addRealty(evt) {
@@ -62,7 +83,7 @@ function addRealty(evt) {
 
   const data = {
     id: uuidv4(),
-    photo: photo.value,
+    photo: img,
     details: details.value,
     rooms: rooms.value,
     area: area.value,
@@ -84,9 +105,9 @@ function addRealty(evt) {
 function createMarkup(arr) {
   return arr
     .map(
-      ({ id, photo, price, area, curFiles }) => `
+      ({ id, photo, price, area}) => `
       <li data-id="${id}">
-        <img src="${curFiles}" alt="${price}">
+        <img src="${photo}" alt="${price}">
         <h3>${price} $</h3>
         <h2>${area} м<sup>2</sup></h2>
     </li>`
