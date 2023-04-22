@@ -137,6 +137,16 @@ a{
     outline: none;
 }
 
+.form-realty__preview{
+    width: 200px;
+    height: auto;
+    max-height: 200px;
+}
+
+.form-realty__preview img {
+    max-width: 100%;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
