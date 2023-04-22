@@ -25,7 +25,18 @@ body{
 }
 
 .add-realty_button{
-    width: 100%;
+    cursor: pointer;
+    padding: 15px 35px;
+    background: rgb(22, 22, 96);
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all .4s ease 0s;
+}
+
+.add-realty_button:hover{
+    background: rgb(17, 17, 148);
 }
 
 .form-realty{
@@ -227,7 +238,7 @@ input::-webkit-inner-spin-button {
 .header__logo img{
     display: block;
     max-width: 100%;
-    transform: scale(2);
+    transform: scale(2.3);
 }
 
 .main{
@@ -279,4 +290,82 @@ input::-webkit-inner-spin-button {
 .header__link_active::before{
     background: #20448c;
     height: 2px;
+}
+
+.header_bg{
+    background: rgb(22, 22, 96);
+}
+
+.main-objects{
+    padding: 100px 0;
+}
+
+.main-objects__list{
+    padding: 30px 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.main-objects__item{
+    flex: 0 0 50%;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+@media all and (max-width: 44em) {
+    .main-objects__item{
+        flex: 1 1 100%;
+    }
+}
+
+.main-objects__body{
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #ccc9c9;
+    color: rgb(22, 22, 96);
+    transition: all .4s ease 0s;
+}
+
+.main-objects__body:hover{
+    box-shadow: 0px 0px 10px rgb(22, 22, 96);
+}
+
+.main-objects__image{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.main-objects__image img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h3{
+    font-weight: 500;
+}
+
+.main-objects__desc *{
+    padding: 5px 0;
+}
+
+.main-objects__title{
+    text-transform: uppercase;
+}
+
+.main-objects__desc{
+    padding: 20px 15px;
+}
+
+.lock{
+    overflow: hidden;
 }
