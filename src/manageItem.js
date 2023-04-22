@@ -35,7 +35,7 @@ function createMarkup({
     <h3 class='main-manage__price'>Ціна: ${price}</h3>
     <h3 class='main-manage__square'>Площа: ${area}</h3>
   <button type="button" class="js-edit main-manage__button">Редагувати об'єкт</button>
-  </div> 
+  </div>
 </div>`
 }
 
