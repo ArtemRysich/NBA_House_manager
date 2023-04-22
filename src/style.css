@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
 *, *::before, *::after{
     padding: 0;
     margin: 0;
@@ -10,6 +12,10 @@ ul{
 
 a{
     text-decoration: none;
+}
+
+body{
+    font-family: Roboto;
 }
 
 .add-realty{
@@ -168,6 +174,7 @@ input::-webkit-inner-spin-button {
 
 .header{
     position: fixed;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
@@ -184,6 +191,15 @@ input::-webkit-inner-spin-button {
 .header__logo{
   width: 50px;
   height: 50px;
+}
+
+.header__list{
+    display: flex;
+    align-items: center;
+}
+
+.header__item{
+    margin-left: 20px;
 }
 
 .header__link{
@@ -217,4 +233,50 @@ input::-webkit-inner-spin-button {
 .main{
     min-height: 100vh;
     background: url('./img/Bg.jpg') center / cover no-repeat fixed;
+    padding: 120px 0;
+    position: relative;
+}
+
+.main::before{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #0000003e;
+}
+
+.main__body{
+    position: relative;
+    z-index: 2;
+    padding: 70px 0;
+}
+
+.main__title{
+    color: #fff;
+    font-size: 3rem;
+    line-height: 120%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.main__body{
+    max-width: 700px;
+}
+
+.main__description{
+    color: #fff;
+    line-height: 120%;
+    font-size: 1.1rem;
+}
+
+.header__link_active{
+    color: #20448c;
+    font-weight: 700;
+}
+.header__link_active::before{
+    background: #20448c;
+    height: 2px;
 }
