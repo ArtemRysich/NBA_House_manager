@@ -1,8 +1,10 @@
 import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
+
 const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
 const list = document.querySelector('.js-list');
 let img = null;
@@ -28,20 +30,19 @@ function onClick() {
 
     <div class='form-realty__input-block'>
       <label for="details" class='form-realty__label'>Опис об'єкту</label>
-      <input type="text" class='form-realty__input' name="realty-details" id="details">
+      <textarea class='form-realty__input' name="realty-details" id="details"></textarea>
     </div>
-    
+
     <div class='form-realty__input-block'>
       <label for="rooms" class='form-realty__label'>Кількість кімнат</label>
       <input type="number" class='form-realty__input' min="0" name="realty-rooms" id="rooms">
     </div>
-    
 
     <div class='form-realty__input-block'>
       <label for="area" class='form-realty__label'>Площа об'єкту м<sup>2</sup>;</label>
       <input type="number" class='form-realty__input' min="0" name="realty-area" id="area">
     </div>
-   
+
     <div class='form-realty__input-block'>
       <label for="price" class='form-realty__label'>Вартість об'єкту</label>
       <input type="number" class='form-realty__input' min="0" name="realty-price" id="price">
@@ -78,21 +79,23 @@ function cardHandler(evt) {
   const { id } = evt.target.closest('.js-realty-item').dataset;
   const { title, photo, details, price, area, rooms, type, status } =
     realtyItems.find(({ id: currentId }) => currentId === id);
-  const instance = basicLightbox.create(`<div data-id="${id}">
-  <img src="${photo}" alt="${title}">
-  <h2>${title}</h2>
-  <h3>${details}</h3>
-  <h3>Ціна: ${price} $</h3>
-  <h3>Площа: ${area} м<sup>2</sup></h3>
-  <h3>Кількість кімнат: ${rooms}</h3>
-  <h3>Тип: ${type}</h3>
-  <h3>Статус: ${status}</h3>
-  <button class="js-edit">Редагувати</button>
+  const instance = basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
+  <div class='manage-popup__image'>
+    <img src="${photo}" alt="${title}">
+  </div>
+  <h2 class='manage-popup__title'>${title}</h2>
+  <h3 class='manage-popup__details'>${details}</h3>
+  <h3 class='manage-popup__price'>Ціна: ${price} $</h3>
+  <h3 class='manage-popup__square>Площа: ${area} м<sup>2</sup></h3>
+  <h3 class='manage-popup__numbers'>Кількість кімнат: ${rooms}</h3>
+  <h3 class='manage-popup__type'>Тип: ${type}</h3>
+  <h3 class='manage-popup__status'>Статус: ${status}</h3>
+  <button class="js-realty-info manage-popup__button">Управління об'єктом</button>
   </div>`);
   instance.show();
 
-  const editBtn = document.querySelector('.js-edit');
-  editBtn.addEventListener('click', handlerEditMode.bind({ id }));
+  const infoBtn = document.querySelector('.js-realty-info');
+  infoBtn.addEventListener('click', handlerRedirectMode.bind({ id }));
 }
 
 function onLoad() {
@@ -151,6 +154,10 @@ function handlerEditMode() {
   instance.show();
 }
 
+function handlerRedirectMode() {
+  window.location.href = './manageItem.html?id=' + this.id;
+}
+
 function renderImage(file) {
   const container = document.querySelector('.js-form-realty__preview');
   const reader = new FileReader();
@@ -168,18 +175,19 @@ function renderImage(file) {
 
 function addRealty(evt) {
   evt.preventDefault();
-  const { details, rooms, area, price, type, title } = evt.currentTarget.elements;
+  const { details, rooms, area, price, type, title } =
+    evt.currentTarget.elements;
 
   const data = {
     id: uuidv4(),
     photo: img,
-    title:title.value,
+    title: title.value,
     details: details.value,
     rooms: rooms.value,
     area: area.value,
     price: price.value,
     type: type.value,
-    status: type.value === 'Продаж' ? 'В продажі' : 'Вільно'
+    status: type.value === 'Продаж' ? 'В продажі' : 'Вільно',
   };
   realtyItems.push(data);
   localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
@@ -205,7 +213,7 @@ function createMarkup(arr) {
           </div>
           <div class='main-objects__desc'>
             <h2 class='main-objects__title'>${title}</h2>
-            <h3 class='main-objects__price'>Ціна: ${price} $</h3>
+            <h3 class='main-objects__price'>Ціна: ${price}$</h3>
             <h3 class='main-objects__square'>Площа: ${area} м<sup>2</sup></h3>
             <h3 class='main-objects__status'>Статус: ${status}</h3>
           </div>

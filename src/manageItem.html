@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <script type="module" src="./manageItem.js"></script>
   <link rel="stylesheet" href="basicLightBox.css">
-  <script type="module" src="./realty.js"></script>
   <title>House manager</title>
   <link rel="shortcut icon" href="img/favicon.png">
 </head>
 
 <body>
-
   <div class="wrapper">
     <header class="header header_bg">
       <div class="header__container">
@@ -23,10 +22,10 @@
         <nav class="header__nav">
           <ul class="header__list">
             <li class="header__item">
-              <a href="./index.html" class="header__link">Головна</a>
+              <a href="./index.html" class="header__link header__link_active">Головна</a>
             </li>
             <li class="header__item">
-              <a href="./realty.html" class="header__link header__link_active">Мої об'єкти</a>
+              <a href="./realty.html" class="header__link">Мої об'єкти</a>
             </li>
             <li class="header__item">
               <a href="./realty.html" class="header__link">Мій кабінет</a>
@@ -38,19 +37,12 @@
         </div>
       </div>
     </header>
-    <main class="main-objects">
-      <div class="main-objects__container">
-        <ul class="js-list main-objects__list"></ul>
-        <div class="add-realty_container"><button class="add-realty_button js-add-realty">Додати об'єкт</button></div>
+    <main class="main-manage">
+      <div class="main-manage__container">
+        <div class="js-container"></div>
       </div>
     </main>
-  <footer>
-  </footer>
-    <footer>
-
-    </footer>
   </div>
   <script src="header.js"></script>
 </body>
-
 </html>
