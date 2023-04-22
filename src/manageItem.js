@@ -22,17 +22,21 @@ function createMarkup({
   details,
   area,
 }) {
-  container.innerHTML = `<div>
-  <img src="${photo}" alt="${title}">
-  <h2>${title}</h2>
-  <h3>${details}</h3>
-  <h3>${type}</h3>
-  <h3>${rooms}</h3>
-  <h3>${status}</h3>
-  <h3>${price}</h3>
-  <h3>${area}</h3>
-</div>
-<button type="button" class="js-edit">Редагувати об'єкт</button>`;
+  container.innerHTML = `<div class='main-manage__body'>
+  <div class='main-manage__image'>
+    <img src="${photo}" alt="${title}">
+  </div>
+  <div class='main-manage__text'>
+    <h2 class='main-manage__title'>${title}</h2>
+    <h3 class='main-manage__desc'>Опис: ${details}</h3>
+    <h3 class='main-manage__type'>Тип: ${type}</h3>
+    <h3 class='main-manage__rooms'>Кімнат: ${rooms}</h3>
+    <h3 class='main-manage__status'>Статус: ${status}</h3>
+    <h3 class='main-manage__price'>Ціна: ${price}</h3>
+    <h3 class='main-manage__square'>Площа: ${area}</h3>
+  <button type="button" class="js-edit main-manage__button">Редагувати об'єкт</button>
+  </div> 
+</div>`
 }
 
 const editBtn = document.querySelector('.js-edit');
@@ -43,15 +47,14 @@ function handlerEditMode() {
     currentItem;
   img = photo;
   const instance = basicLightbox.create(`
-  <div>
-<form action="submit" class="js-form-realty form-realty">
+<form action="submit" class="js-form-realty form-realty form-realty_big">
 
 <div class='form-realty__input-block form-realty__input-block_row'>
   <label for="photo" class='form-realty__label'>Завантажте фото об'єкту</label>
   <label for="photo" class='form-realty__image-btn'></label>
   <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
 </div>
-<div class="js-form-realty__preview"><img src="${photo}" alt="preview"></div>
+<div class="js-form-realty__preview form-realty__preview"><img src="${photo}" alt="preview"></div>
 
 <div class='form-realty__input-block'>
 <label for="text" class='form-realty__label'>Назва вашого об'єкта</label>
@@ -88,10 +91,8 @@ function handlerEditMode() {
       type === 'Оренда' ? 'selected' : ''
     }>Оренда</option>
   </select>
-
-  ${getStatus(type, status)}
-
 </div>
+${getStatus(type, status)}
 <button class='form-realty__create'>Зберегти</button>
 
 </form>
