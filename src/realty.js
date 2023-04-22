@@ -18,7 +18,14 @@ function onClick() {
       <label for="photo" class='form-realty__image-btn'></label>
       <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
     </div>
+
     <div class="js-form-realty__preview form-realty__preview"></div>
+
+    <div class='form-realty__input-block'>
+    <label for="text" class='form-realty__label'>Назва вашого об'єкта</label>
+    <input type="text" class='form-realty__input' name="realty-title" id="title">
+    </div>
+
     <div class='form-realty__input-block'>
       <label for="details" class='form-realty__label'>Опис об'єкту</label>
       <input type="text" class='form-realty__input' name="realty-details" id="details">
@@ -142,7 +149,7 @@ function renderImage(file) {
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    img = event.target.result
+    img = event.target.result;
     container.insertAdjacentHTML(
       'beforeend',
       `<img src="${img}" alt="preview">`
@@ -154,21 +161,23 @@ function renderImage(file) {
 
 function addRealty(evt) {
   evt.preventDefault();
-  const { photo, details, rooms, area, price, type } =
-    evt.currentTarget.elements;
+  const { details, rooms, area, price, type, title } = evt.currentTarget.elements;
 
   const data = {
     id: uuidv4(),
     photo: img,
+    title:title.value,
     details: details.value,
     rooms: rooms.value,
     area: area.value,
     price: price.value,
     type: type.value,
+    status: type.value === 'Продаж' ? 'В продажі' : 'Вільно'
   };
   realtyItems.push(data);
   localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
   this.close();
+  list.innerHTML = createMarkup(realtyItems);
 }
 
 (function () {
@@ -181,13 +190,13 @@ function addRealty(evt) {
 function createMarkup(arr) {
   return arr
     .map(
-      ({ status, id, photo, price, area, title }) => `
+      ({ status, id, photo, price, area, title, type }) => `
       <li data-id="${id}" class="js-realty-item">
         <img src="${photo}" alt="${price}">
         <h2>${title}</h2>
         <h3>Ціна: ${price} $</h3>
         <h3>Площа: ${area} м<sup>2</sup></h3>
-        <h3>Статус: ${status} $</h3>
+        <h3>Статус: ${status}</h3>
     </li>`
     )
     .join('');
