@@ -7,7 +7,7 @@ async function signUpCall(userData) {
     },
   };
   const resp = await fetch(
-    'https://nba-house-manager.herokuapp.com/users/create/',
+    'https://nba-house-manager.herokuapp.com/users/create',
     options
   );
   if (!resp.ok) {

@@ -3,9 +3,7 @@ import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { addToCollection } from './services/collection/addToCollection';
 
 const addRealtyBtn = document.querySelector('.js-add-realty');
-const LS_KEY = 'realty-items';
-
-const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
+const realtyItems = [];
 const list = document.querySelector('.js-list');
 let img = null;
 addRealtyBtn.addEventListener('click', onClick);
@@ -99,8 +97,9 @@ function cardHandler(evt) {
     return;
   }
   const { id } = evt.target.closest('.js-realty-item').dataset;
+  console.log(id);
   const { title, photo, details, price, area, rooms, type, status } =
-    realtyItems.find(({ id: currentId }) => currentId === id);
+    realtyItems.find(({ id: currentId }) => currentId === Number(id));
   const instance =
     basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
   <div class='manage-popup__image'>
@@ -135,12 +134,11 @@ function renderImage(file) {
 
   reader.onload = function (event) {
     img = event.target.result;
-    container.innerHTML =`<img src="${img}" alt="preview">`
+    container.innerHTML = `<img src="${img}" alt="preview">`;
   };
 
   reader.readAsDataURL(file);
 }
-
 function addRealty(evt) {
   evt.preventDefault();
   const { details, rooms, area, price, type, title } =
@@ -158,10 +156,12 @@ function addRealty(evt) {
   };
   console.log(data);
   addToCollection(data)
-    .then(data => console.log(data))
+    .then(resp => {
+      realtyItems.push(resp);
+      list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
+    })
     .catch(err => console.log(err));
   this.close();
-  //   list.innerHTML = createMarkup(realtyItems);
 }
 
 (function () {
