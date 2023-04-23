@@ -1,13 +1,3 @@
-import { getDatabase, ref, set } from 'firebase/database';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './firebase-cfg';
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);

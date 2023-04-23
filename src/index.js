@@ -10,14 +10,10 @@ logInBtn.addEventListener('click', showLogIn);
 
 function showSignUp() {
   const instance = basicLightbox.create(`
-  <form class="js-signIn">
-    <input type="text" name="name" placeholder="Ім'я користувача" />
-
-    <input type="email" name="email" placeholder="Введіть емейл" />
-
-    <input type="password" name="password" placeholder="Введіть пароль" />
-
-    <button>Зареєструватись</button>
+  <form class="js-signIn signIn">
+    <input type="email" name="email" class='signIn__input' placeholder="Введіть емейл" />
+    <input type="password" class='signIn__input' name="password" placeholder="Введіть пароль" />
+    <button class='signIn__button'>Зареєструватись</button>
   </form>
     `);
     instance.show()
@@ -26,14 +22,21 @@ function showSignUp() {
 }
 function showLogIn() {
   const instance = basicLightbox.create(`
-    <form class="js-logIn">
-    <input type="email" name="email" placeholder="Введіть емейл" />
+    <form class="js-logIn logIn">
+    <input type="email" name="email" class='logIn__input' placeholder="Введіть емейл..." />
 
-    <input type="password" name="password" placeholder="Введіть пароль" />
+    <input type="password" name="password" class='logIn__input' placeholder="Введіть пароль..." />
 
-    <button>Увійт</button>
+    <button class='logIn__button'>Увійти</button>
   </form>
-  `);
+  `, {
+    onShow: () => {
+      document.body.classList.add('lock');
+    },
+    onClose: () => {
+      document.body.classList.remove('lock');
+    }
+  });
   instance.show()
   const logIn = document.querySelector('.js-logIn');
   logIn.addEventListener('submit', onLogInUser);
