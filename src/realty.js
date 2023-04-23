@@ -135,10 +135,7 @@ function renderImage(file) {
 
   reader.onload = function (event) {
     img = event.target.result;
-    container.insertAdjacentHTML(
-      'beforeend',
-      `<img src="${img}" alt="preview">`
-    );
+    container.innerHTML =`<img src="${img}" alt="preview">`
   };
 
   reader.readAsDataURL(file);

@@ -25,7 +25,7 @@ function showSignUp() {
 function showLogIn() {
   const instance = basicLightbox.create(`
     <form class="js-logIn logIn">
-    <input type="email" name="email" class='logIn__input' placeholder="Введіть емейл..." />
+    <input type="text" name="email" class='logIn__input' placeholder="Введіть емейл..." />
     <input type="password" name="password" class='logIn__input' placeholder="Введіть пароль..." />
     <button class='logIn__button'>Увійти</button>
   </form>
