@@ -10,6 +10,13 @@ const list = document.querySelector('.js-list');
 let img = null;
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
+
+const filter = document.querySelector('.js-filter');
+const filterRemoveBtn = document.querySelector('.js-filter-items-remove')
+
+filterRemoveBtn.addEventListener('click', handlerRemoveFilter);
+filter.addEventListener('submit', handlerAddFilter);
+
 function handlerAddFilter(evt) {
   evt.preventDefault();
   const { filter } = evt.currentTarget.elements;

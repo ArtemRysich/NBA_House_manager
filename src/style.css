@@ -398,6 +398,7 @@ input::-webkit-inner-spin-button {
 }
 
 .main-objects__body{
+    height: 100%;
     width: 100%;
     cursor: pointer;
     box-shadow: 0px 0px 10px #ccc9c9;

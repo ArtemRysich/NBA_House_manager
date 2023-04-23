@@ -1,31 +1,46 @@
 import * as basicLightbox from 'basiclightbox';
-import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 const notificationButton = document.querySelector('.notification');
-const LS_KEY = 'notificationMessages'
 
-let notificationMessages;
-if(localStorage.getItem(LS_KEY)){
-    notificationMessages = localStorage.getItem(LS_KEY);
-}
-else{
-    notificationMessages = [
-        {
-            id: uuidv4(), title: 'Notification 1', description: 'Description', read: false
-        },
-        {
-            id: uuidv4(), title: 'Notification 2', description: 'Description', read: true
-        },
-        {
-            id: uuidv4(), title: 'Notification 3', description: 'Description', read: true
-        },
-    ];
-}
+const realtyItems = JSON.parse(localStorage.getItem('realty-items'));
 
+/* const notificationMessages = realtyItems.map(item => {
+    const date = new Date();
+    let rentFinalDay = parseInt(item.rentTime.slice(8,10));
+    let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
+    let currentDay = date.getDate();
+    let currentMonth = date.getMonth();
+    if(rentFinalMonth < currentMonth && item){
+        item.read = false;
+        return item;
+    }
+    if((rentFinalDay - 3 > currentDay) && (rentFinalMonth === currentMonth || rentFinalMonth < currentMonth) && item){
+        item.read = false;
+        return item;
+    }
+}); */
+
+const notificationMessages = [];
+
+for(let i = 0; i < realtyItems.length; i++){
+    const item = realtyItems[i];
+    const date = new Date();
+    let rentFinalDay = parseInt(item.rentTime.slice(8,10));
+    let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
+    let currentDay = date.getDate();
+    let currentMonth = date.getMonth() + 5;
+    if(rentFinalMonth < currentMonth){
+        item.read = false;
+        notificationMessages.push(item);
+    }
+    if((rentFinalDay - 3 > currentDay) && (rentFinalMonth === currentMonth || rentFinalMonth < currentMonth)){
+        item.read = false;
+        notificationMessages.push(item);
+    }
+}
 
 const notificationNumbres = document.querySelector('.notification__numbers');
-
 
 if(!notificationMessages.length){
     notificationNumbres.style.display = 'none';
@@ -44,16 +59,23 @@ notificationButton.addEventListener('click', () => {
         </div>
     `)
     instance.show();
+    const notificationList = document.querySelector('.notification-popup__list');
+    notificationList.addEventListener('click', (e) => {
+        if(e.target.closest('.notification-popup__item')){
+            e.target.closest('.notification-popup__item').classList.remove('read')
+        }
+    })
 });
+
 
 function renderNotificationItems(){
     let layout = ``;
     notificationMessages.forEach(notification => {
         layout += `
-        <li class='notification-popup__item ${notification.read ? '' : 'read'}'>
-            <h2 class='notification-popup__title'>${notification.title}</h2>
-            <div class='notification-popup__description'>${notification.description}</div>
+        <li class='notification-popup__item ${notification?.read ? '' : 'read'}' data-uniq-id='${notification?.id}'>
+            <h2 class='notification-popup__title'>Увага</h2>
+            <div class='notification-popup__description'>Залишилося менше 3-x днів до зняття орендної плати в будинку <strong>${notification?.title}!</strong></div>
         </li>`
     })
-    return layout
+    return layout;
 }
