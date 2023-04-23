@@ -40,6 +40,13 @@ textarea{
     transition: all .4s ease 0s;
 }
 
+@media all and (max-width: 600px) {
+    .add-realty_button{
+        margin-top: 15px;
+        margin-left: 0;
+    }
+}
+
 .add-realty_button:hover{
     background: rgb(17, 17, 148);
 }
@@ -804,6 +811,16 @@ h3{
 .filter{
     margin-left: 15px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media all and (max-width: 578px) {
+    .filter{
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .filter-span{
@@ -825,7 +842,7 @@ h3{
     display: flex;
 }
 
-@media all and (max-width: 670px) {
+@media all and (max-width: 922px) {
     .fitler-some-block{
         flex-direction: column;
     }
