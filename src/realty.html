@@ -7,7 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="basicLightBox.css">
-  <script type="module" src="./realty.js"></script>   
+
+  <script type="module" src="./realty.js"></script>
+  <script src="https://kit.fontawesome.com/6feee529ab.js" crossorigin="anonymous"></script>
 <!--   <script type="module" src="./notification.js"></script> -->
   <script type="module" src="./header.js"></script>
   <title>House manager</title>
@@ -46,12 +48,55 @@
     </header>
     <main class="main-objects">
       <div class="main-objects__container">
+        <div>
+          <form action="submit" class="js-filter filter">
+            <h3 class="filter__title">Фільтр пошуку</h3>
+            <div class='fitler-some-block'>
+              <div class="filter-block">
+                <div>
+                  <span class="filter-span">Фільтр для продажу:</span>
+                  <div class="filter-row">
+                    <label class="filter__input">
+                      <input type="radio" class="option-input radio" name="filter" value="В продажу" />
+                      В продажу
+                    </label>
+                    <label class="filter__input">
+                      <input type="radio" class="option-input radio" name="filter" value="Продано" />
+                      Продано
+                    </label>
+                  </div>
+              </div>
+              </div>
+              <div>
+                <div class="filter-block">
+                  <div>
+                    <span class="filter-span">Фільтр для оренди:</span>
+                    <div class="filter-row">
+                      <label class="filter__input">
+                        <input type="radio" class="option-input radio" name="filter" value="Вільно"/>
+                        Вільно
+                      </label>
+                      <label class="filter__input">
+                        <input type="radio" class="option-input radio" name="filter" value="В оренді"/>
+                        В оренді
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="filter__buttons">
+              <button class="js-filter-items-add filter__button">Застосувати</button>
+              <button class="js-filter-items-remove filter__button">Скинути фільтер</button>
+            </div>
+          </form>
+        </div>
         <ul class="js-list main-objects__list"></ul>
         <div class="add-realty_container"><button class="add-realty_button js-add-realty">Додати об'єкт</button></div>
       </div>
     </main>
-  <footer>
-  </footer>
+    <footer>
+    </footer>
     <footer>
     </footer>
   </div>
