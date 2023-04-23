@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="basicLightBox.css">
   <script type="module" src="./realty.js"></script>
+  <script src="https://kit.fontawesome.com/6feee529ab.js" crossorigin="anonymous"></script>
   <title>House manager</title>
   <link rel="shortcut icon" href="img/favicon.png">
 </head>
@@ -39,13 +40,45 @@
       </div>
     </header>
     <main class="main-objects">
+      <div>
+        <form action="submit" class="js-filter">
+          <h3>Фільтер пошуку</h3>
+          <div class='py'>
+            <div>
+              <span>Фільтр для продажу</span>
+              <label>
+                <input type="radio" class="option-input radio" name="onSale" value="В продажу" />
+                В продажу
+              </label>
+              <label>
+                <input type="radio" class="option-input radio" name="soldOut" value="Продано" />
+                Продано
+              </label>
+            </div>
+            <div>
+              <span>Фільтр для оренди</span>
+              <label>
+                <input type="radio" class="option-input radio" name="free" value="Вільно"/>
+                Вільно
+              </label>
+              <label>
+                <input type="radio" class="option-input radio" name="rent" value="В оренді"/>
+                В оренді
+              </label>
+            </div>
+          </div>
+
+          <button class="js-filter-items-add">Застосувати</button>
+        </form>
+        <button class="js-filter-items-remove">Скинути фільтер</button>
+      </div>
       <div class="main-objects__container">
         <ul class="js-list main-objects__list"></ul>
         <div class="add-realty_container"><button class="add-realty_button js-add-realty">Додати об'єкт</button></div>
       </div>
     </main>
-  <footer>
-  </footer>
+    <footer>
+    </footer>
     <footer>
     </footer>
   </div>

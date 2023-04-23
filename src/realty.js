@@ -3,22 +3,37 @@ import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 const addRealtyBtn = document.querySelector('.js-add-realty');
+const filter = document.querySelector('.js-filter');
+const filterRemoveBtn = document.querySelector('.js-filter-items-remove');
 const LS_KEY = 'realty-items';
 
 const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
 const list = document.querySelector('.js-list');
 let img = null;
 
+filterRemoveBtn.addEventListener('click', handlerRemoveFilter);
+filter.addEventListener('submit', handlerAddFilter);
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
+
+function handlerAddFilter(evt) {
+  evt.preventDefault();
+  const {} = evt.currentTarget.elements;
+}
+
+function handlerRemoveFilter() {
+  filter.reset();
+  list.innerHTML = createMarkup(realtyItems);
+}
 function onClick() {
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <form action="submit" class="js-form-realty form-realty">
 
     <div class='form-realty__input-block form-realty__input-block_row'>
       <label for="photo" class='form-realty__label'>Завантажте фото об'єкту</label>
       <label for="photo" class='form-realty__image-btn'></label>
-      <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
+      <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg"  class="js-test"hidden>
     </div>
 
     <div class="js-form-realty__preview form-realty__preview"></div>
@@ -56,14 +71,16 @@ function onClick() {
       </select>
     </div>
     <button class='form-realty__create'>Створити об'єкт</button>
-  </form>`, {
-    onShow: () => {
-      document.body.classList.add('lock');
-    },
-    onClose: () => {
-      document.body.classList.remove('lock');
+  </form>`,
+    {
+      onShow: () => {
+        document.body.classList.add('lock');
+      },
+      onClose: () => {
+        document.body.classList.remove('lock');
+      },
     }
-  });
+  );
 
   instance.show();
 
@@ -79,7 +96,8 @@ function cardHandler(evt) {
   const { id } = evt.target.closest('.js-realty-item').dataset;
   const { title, photo, details, price, area, rooms, type, status } =
     realtyItems.find(({ id: currentId }) => currentId === id);
-  const instance = basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
+  const instance =
+    basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
   <div class='manage-popup__image'>
     <img src="${photo}" alt="${title}">
   </div>
@@ -123,6 +141,7 @@ function renderImage(file) {
 
 function addRealty(evt) {
   evt.preventDefault();
+  console.log(document.querySelector('.js-test').value);
   const { details, rooms, area, price, type, title } =
     evt.currentTarget.elements;
 
