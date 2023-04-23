@@ -1,0 +1,2 @@
+const e=document.querySelector(".header"),t=document.querySelector(".header__burger"),s=document.querySelector(".header__nav");window.addEventListener("scroll",(()=>{pageYOffset>40&&!e.classList.contains("header_bg")?e.classList.add("active"):e.classList.remove("active")})),t.addEventListener("click",(()=>{document.body.classList.toggle("lock"),t.classList.toggle("active"),s.classList.toggle("active")}));
+//# sourceMappingURL=realty.528d313b.js.map

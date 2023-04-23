@@ -1,2 +1,0 @@
-!function(){var e=document.querySelector(".header"),t=document.querySelector(".header__burger"),c=document.querySelector(".header__nav");window.addEventListener("scroll",(function(){pageYOffset>40&&!e.classList.contains("header_bg")?e.classList.add("active"):e.classList.remove("active")})),t.addEventListener("click",(function(){t.classList.toggle("active"),c.classList.toggle("active")}))}();
-//# sourceMappingURL=manageItem.9b5eed5d.js.map
