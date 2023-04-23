@@ -1,15 +1,16 @@
-async function addToCollection(data) {
+async function getItmCollection(id) {
   const token = localStorage.getItem('Token');
+  console.log(token);
   const options = {
-    method: 'POST',
-    body: JSON.stringify(data),
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   };
+
   const resp = await fetch(
-    'https://nba-house-manager.herokuapp.com/objrent/create/',
+    `https://nba-house-manager.herokuapp.com/objrent/${id}`,
     options
   );
   if (!resp.ok) {
@@ -19,4 +20,4 @@ async function addToCollection(data) {
   return resp.json();
 }
 
-export { addToCollection };
+export { getItmCollection };

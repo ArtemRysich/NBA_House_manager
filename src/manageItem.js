@@ -1,17 +1,31 @@
 import * as basicLightbox from 'basiclightbox';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import { getItmCollection } from './services/collection/getItemCollection';
 
 const loc = document.location;
 const searchId = loc.search.slice(4);
-const LS_KEY = 'realty-items';
-const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
-const currentItem = realtyItems.find(({ id }) => id === searchId);
 const container = document.querySelector('.js-container');
 const timer = document.querySelector('.js-timer');
+const prevPage = document.querySelector('.js-prev-page');
 let img = null;
+let currentTime = null;
+let currentItem = null;
+prevPage.addEventListener('click', handlerPrevPage);
 
-createMarkup(currentItem);
-startTimer(currentItem.rentTime);
+function handlerPrevPage() {
+  history.back();
+}
+getItmCollection(searchId).then(data => {
+  currentItem = data;
+  currentTime = currentItem.rentTime;
+  createMarkup(currentItem);
+  startTimer(currentTime);
+  const editBtn = document.querySelector('.js-edit');
+  editBtn.addEventListener('click', handlerEditMode);
+});
+
+// createMarkup(currentItem);
+startTimer(currentItem);
 function createMarkup({
   type,
   title,
@@ -36,17 +50,15 @@ function createMarkup({
     <h3 class='main-manage__square'>Площа: ${area} м<sup>2</sup></h3>
   <button type="button" class="js-edit main-manage__button">Редагувати об'єкт</button>
   </div>
-</div>`
+</div>`;
 }
-
-const editBtn = document.querySelector('.js-edit');
-editBtn.addEventListener('click', handlerEditMode);
 
 function handlerEditMode() {
   const { title, photo, details, price, area, rooms, type, status } =
     currentItem;
   img = photo;
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
 <form action="submit" class="js-form-realty form-realty form-realty_big">
 
 <div class='form-realty__input-block form-realty__input-block_row'>
@@ -96,18 +108,21 @@ ${getStatus(type, status)}
 <button class='form-realty__create'>Зберегти</button>
 <button type="button" class='form-realty__create js-form-realty__close'>Відмінити</button>
 </form>
-</div>`, {
-  onShow: () => {
-    document.body.classList.add('lock');
-  },
-  onClose: () => {
-    document.body.classList.remove('lock');
-  }
-});
+</div>`,
+    {
+      onShow: () => {
+        document.body.classList.add('lock');
+      },
+      onClose: () => {
+        document.body.classList.remove('lock');
+      },
+    }
+  );
   instance.show();
 
   const form = document.querySelector('.js-form-realty');
   const closeBtn = document.querySelector('.js-form-realty__close');
+
   form.addEventListener('submit', onSaveAction.bind(instance));
   closeBtn.addEventListener('click', () => instance.close());
   form.photo.addEventListener('change', onLoad);
@@ -169,9 +184,8 @@ function onSaveAction(evt) {
   };
   createMarkup(data);
   startTimer(data.rentTime);
-  const idx = realtyItems.findIndex(({ id }) => id === searchId);
-  realtyItems[idx] = data;
-  localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
+  currentItem = data;
+
   this.close();
 }
 
@@ -181,10 +195,7 @@ function renderImage(file) {
 
   reader.onload = function (event) {
     img = event.target.result;
-    container.insertAdjacentHTML(
-      'beforeend',
-      `<img src="${img}" alt="preview">`
-    );
+    container.innerHTML = `<img src="${img}" alt="preview">`;
   };
 
   reader.readAsDataURL(file);
@@ -194,6 +205,7 @@ function onLoad() {
 }
 
 function startTimer(time) {
+  console.log(time);
   if (!time) {
     return;
   }
@@ -203,12 +215,9 @@ function startTimer(time) {
     const diff = rentTime - currentTime;
 
     if (diff <= 0) {
-      const idx = realtyItems.findIndex(({ id }) => id === searchId);
       const month = currentTime.getMonth();
       rentTime.setMonth(month !== 11 ? month + 1 : 0);
       currentItem.rentTime = rentTime;
-      realtyItems[idx] = data;
-      localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
     }
 
     const { days, hours, minutes, seconds } = convertMs(diff);

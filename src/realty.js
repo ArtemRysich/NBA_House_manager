@@ -1,6 +1,7 @@
 import * as basicLightbox from 'basiclightbox';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { addToCollection } from './services/collection/addToCollection';
+import { getCollection } from './services/collection/getCollection';
 
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const realtyItems = [];
@@ -25,8 +26,14 @@ function handlerAddFilter(evt) {
 }
 
 function handlerRemoveFilter() {
-  filter.reset();
-  list.innerHTML = createMarkup(realtyItems);
+    filter.reset();
+    getCollection().then(data => {
+        if (!data.length) {
+          return;
+        }
+        list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
+      });
+
 }
 function onClick() {
   const instance = basicLightbox.create(
@@ -165,10 +172,13 @@ function addRealty(evt) {
 }
 
 (function () {
-  if (!realtyItems.length) {
-    return;
-  }
-  list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
+  getCollection().then(data => {
+    if (!data.length) {
+      return;
+    }
+    realtyItems.push(...data);
+    list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
+  });
 })();
 
 function createMarkup(arr) {
