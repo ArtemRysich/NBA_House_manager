@@ -1,6 +1,8 @@
 import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import './services/auth/auth-settings'
+
 
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const filter = document.querySelector('.js-filter');
