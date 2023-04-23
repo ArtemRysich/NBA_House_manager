@@ -315,7 +315,7 @@ input::-webkit-inner-spin-button {
     top: 0;
     width: 100%;
     height: 100%;
-    background: #0000003e;
+    background: #00000071;
 }
 
 .main__body{
@@ -517,7 +517,7 @@ h3{
 }
 
 .main-manage{
-    padding: 120px 0;
+    padding: 120px 0 40px;
 }
 
 .main-manage__body{
@@ -625,8 +625,6 @@ h3{
     background: #fff;
   }
 
-
-
   label{
     display:block;
     line-height:40px;
@@ -689,7 +687,7 @@ h3{
   .option-input.radio::after {
     border-radius: 50%;
   }
-  
+
   @keyframes click-wave {
     0% {
       height: 40px;
@@ -705,3 +703,100 @@ h3{
       opacity: 0;
     }
   }
+
+.main-manage__timer{
+    display: flex;
+}
+
+.fields{
+    display: flex;
+}
+
+.field{
+    width: 120px;
+    padding: 10px 15px;
+    border: 3px groove rgb(15, 15, 54);
+    background: rgb(22, 22, 96);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.1rem;
+    background: rgb(22, 22, 96);
+}
+
+.field span:first-child{
+    font-weight: 700;
+}
+
+.timer__title{
+    font-size: 1.5rem;
+    color: rgb(22, 22, 96);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.notification{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all .4s ease 0s;
+}
+
+.notification:hover{
+    background: #d4d2d2;
+}
+
+.notification__numbers{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+.notification-popup{
+    padding: 15px;
+    width: 550px;
+    overflow: auto;
+    height: 340px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.notification-popup__item{
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.notification-popup__item:last-child{
+    margin-bottom: 0;
+}
+
+.notification-popup__title{
+    margin-bottom: 5px;
+}
+
+.notification-popup__description{
+    font-size: 1rem;
+}
+
+.read{
+    background: red;
+    border-radius: 10px;
+    color: #fff;
+}

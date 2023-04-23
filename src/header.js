@@ -12,6 +12,7 @@ window.addEventListener('scroll', () => {
 })
 
 burgerButton.addEventListener('click', () => {
+    document.body.classList.toggle('lock');
     burgerButton.classList.toggle('active');
     burgerMenu.classList.toggle('active');
 });

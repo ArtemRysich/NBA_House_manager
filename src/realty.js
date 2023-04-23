@@ -2,6 +2,7 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
+
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const filter = document.querySelector('.js-filter');
 const filterRemoveBtn = document.querySelector('.js-filter-items-remove');
@@ -13,6 +14,7 @@ let img = null;
 
 filterRemoveBtn.addEventListener('click', handlerRemoveFilter);
 filter.addEventListener('submit', handlerAddFilter);
+
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
 

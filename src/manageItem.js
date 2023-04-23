@@ -32,8 +32,8 @@ function createMarkup({
     <h3 class='main-manage__type'>Тип: ${type}</h3>
     <h3 class='main-manage__rooms'>Кімнат: ${rooms}</h3>
     <h3 class='main-manage__status'>Статус: ${status}</h3>
-    <h3 class='main-manage__price'>Ціна: ${price}</h3>
-    <h3 class='main-manage__square'>Площа: ${area}</h3>
+    <h3 class='main-manage__price'>Ціна: ${price}$</h3>
+    <h3 class='main-manage__square'>Площа: ${area} м<sup>2</sup></h3>
   <button type="button" class="js-edit main-manage__button">Редагувати об'єкт</button>
   </div>
 </div>`
@@ -94,10 +94,16 @@ function handlerEditMode() {
 </div>
 ${getStatus(type, status)}
 <button class='form-realty__create'>Зберегти</button>
-
-</form>
 <button type="button" class='form-realty__create js-form-realty__close'>Відмінити</button>
-</div>`);
+</form>
+</div>`, {
+  onShow: () => {
+    document.body.classList.add('lock');
+  },
+  onClose: () => {
+    document.body.classList.remove('lock');
+  }
+});
   instance.show();
 
   const form = document.querySelector('.js-form-realty');
@@ -207,23 +213,28 @@ function startTimer(time) {
 
     const { days, hours, minutes, seconds } = convertMs(diff);
 
-    timer.innerHTML = `<div class="field">
-    <h2>До отримання оренди залишилось</h2>
-  <span class="value" data-days>${days}</span>
-  <span class="label">Днів</span>
-  </div>
-  <div class="field">
-  <span class="value" data-hours>${hours}</span>
-  <span class="label">Годин</span>
-  </div>
-  <div class="field">
-  <span class="value" data-minutes>${minutes}</span>
-  <span class="label">Хвилин</span>
-  </div>
-  <div class="field">
-  <span class="value" data-seconds>${seconds}</span>
-  <span class="label">Секунд</span>
-  </div>`;
+    timer.innerHTML = `
+    <div class='timer'>
+      <h2 class='timer__title'>До отримання оренди залишилось!</h2>
+      <div class='fields'>
+        <div class="field">
+          <span class="value" data-days>${days}</span>
+          <span class="label">Днів</span>
+        </div>
+        <div class="field">
+          <span class="value" data-hours>${hours}</span>
+          <span class="label">Годин</span>
+        </div>
+        <div class="field">
+          <span class="value" data-minutes>${minutes}</span>
+          <span class="label">Хвилин</span>
+        </div>
+        <div class="field">
+          <span class="value" data-seconds>${seconds}</span>
+          <span class="label">Секунд</span>
+        </div>
+      </div>
+    </div>`;
   }, 1000);
 }
 
