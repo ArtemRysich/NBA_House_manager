@@ -1,6 +1,8 @@
-import User from './services/auth/user';
 import * as basicLightbox from 'basiclightbox';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+
+import { loginCall } from './services/auth/login';
+import { signUpCall } from './services/auth/signup';
 
 const signUpBtn = document.querySelector('.js-show-signUp');
 const logInBtn = document.querySelector('.js-show-signIn');
@@ -11,64 +13,56 @@ logInBtn.addEventListener('click', showLogIn);
 function showSignUp() {
   const instance = basicLightbox.create(`
   <form class="js-signIn">
-    <input type="text" name="name" placeholder="Ім'я користувача" />
-
     <input type="email" name="email" placeholder="Введіть емейл" />
-
     <input type="password" name="password" placeholder="Введіть пароль" />
-
     <button>Зареєструватись</button>
   </form>
     `);
-    instance.show()
-    const signIn = document.querySelector('.js-signIn');
-    signIn.addEventListener('submit', onCreateUser);
+  instance.show();
+  const signIn = document.querySelector('.js-signIn');
+  signIn.addEventListener('submit', onCreateUser);
 }
 function showLogIn() {
   const instance = basicLightbox.create(`
     <form class="js-logIn">
-    <input type="email" name="email" placeholder="Введіть емейл" />
+    <input type="text" name="email" placeholder="Введіть емейл" />
 
     <input type="password" name="password" placeholder="Введіть пароль" />
 
     <button>Увійт</button>
   </form>
   `);
-  instance.show()
+  instance.show();
   const logIn = document.querySelector('.js-logIn');
   logIn.addEventListener('submit', onLogInUser);
 }
 
-
 function onCreateUser(e) {
   e.preventDefault();
 
+  const { email:{value : username}, password:{value: password}} = e.currentTarget.elements;
+
   const userData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    password: document.getElementById('reg-pswd').value,
+    username,
+    password,
   };
 
-  const user = new User(userData);
-
-  user.create();
-  console.log(user);
+  signUpCall(userData).then(data => console.log(data)).catch(err => console.log(err))
 }
 
 function onLogInUser(e) {
   e.preventDefault();
   console.log(e.currentTarget.elements);
   const {
-    email: { value: email },
+    email: { value: username },
     password: { value: password },
   } = e.currentTarget.elements;
 
   const userData = {
-    email,
+    username,
     password,
   };
-
-  const user = new User(userData);
-
-  user.logIn();
+  loginCall(userData)
+    .then(data => localStorage.setItem('Token', data.token))
+    .catch(err => console.log(err));
 }
