@@ -1,7 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
-import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
-
+import { addToCollection } from './services/collection/addToCollection';
 
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
@@ -13,7 +12,7 @@ addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
 
 const filter = document.querySelector('.js-filter');
-const filterRemoveBtn = document.querySelector('.js-filter-items-remove')
+const filterRemoveBtn = document.querySelector('.js-filter-items-remove');
 
 filterRemoveBtn.addEventListener('click', handlerRemoveFilter);
 filter.addEventListener('submit', handlerAddFilter);
@@ -21,7 +20,9 @@ filter.addEventListener('submit', handlerAddFilter);
 function handlerAddFilter(evt) {
   evt.preventDefault();
   const { filter } = evt.currentTarget.elements;
-  const filteredItems = realtyItems.filter(({status}) => status === filter.value);
+  const filteredItems = realtyItems.filter(
+    ({ status }) => status === filter.value
+  );
   list.innerHTML = createMarkup(filteredItems);
 }
 
@@ -30,7 +31,8 @@ function handlerRemoveFilter() {
   list.innerHTML = createMarkup(realtyItems);
 }
 function onClick() {
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <form action="submit" class="js-form-realty form-realty">
 
     <div class='form-realty__input-block form-realty__input-block_row'>
@@ -74,14 +76,16 @@ function onClick() {
       </select>
     </div>
     <button class='form-realty__create'>Створити об'єкт</button>
-  </form>`, {
-    onShow: () => {
-      document.body.classList.add('lock');
-    },
-    onClose: () => {
-      document.body.classList.remove('lock');
+  </form>`,
+    {
+      onShow: () => {
+        document.body.classList.add('lock');
+      },
+      onClose: () => {
+        document.body.classList.remove('lock');
+      },
     }
-  });
+  );
 
   instance.show();
 
@@ -97,7 +101,8 @@ function cardHandler(evt) {
   const { id } = evt.target.closest('.js-realty-item').dataset;
   const { title, photo, details, price, area, rooms, type, status } =
     realtyItems.find(({ id: currentId }) => currentId === id);
-  const instance = basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
+  const instance =
+    basicLightbox.create(`<div data-id="${id}" class='manage-popup'>
   <div class='manage-popup__image'>
     <img src="${photo}" alt="${title}">
   </div>
@@ -145,7 +150,6 @@ function addRealty(evt) {
     evt.currentTarget.elements;
 
   const data = {
-    id: uuidv4(),
     photo: img,
     title: title.value,
     details: details.value,
@@ -155,10 +159,12 @@ function addRealty(evt) {
     type: type.value,
     status: type.value === 'Продаж' ? 'В продажі' : 'Вільно',
   };
-  realtyItems.push(data);
-  localStorage.setItem(LS_KEY, JSON.stringify(realtyItems));
+  console.log(data);
+  addToCollection(data)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   this.close();
-  list.innerHTML = createMarkup(realtyItems);
+  //   list.innerHTML = createMarkup(realtyItems);
 }
 
 (function () {
