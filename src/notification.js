@@ -10,23 +10,21 @@ const notificationMessages = [];
 if (realtyItems) {
   for (let i = 0; i < realtyItems.length; i++) {
     const item = realtyItems[i];
-    if (item.rentTime) {
-      const date = new Date();
-      let rentFinalDay = parseInt(item.rentTime.slice(8, 10));
-      let rentFinalMonth = parseInt(item.rentTime.slice(5, 7));
-      let currentDay = date.getDate();
-      let currentMonth = date.getMonth() + 4;
-      if (rentFinalMonth < currentMonth) {
-        item.read = false;
-        notificationMessages.push(item);
-      }
-      if (
-        rentFinalDay - 3 > currentDay &&
-        (rentFinalMonth === currentMonth || rentFinalMonth < currentMonth)
-      ) {
-        item.read = false;
-        notificationMessages.push(item);
-      }
+
+    if(item.rentTime){
+        const date = new Date();
+        let rentFinalDay = parseInt(item.rentTime.slice(8,10));
+        let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
+        let currentDay = date.getDate();
+        let currentMonth = date.getMonth();
+        if(rentFinalMonth < currentMonth){
+            item.read = false;
+            notificationMessages.push(item);
+        }
+        if((rentFinalDay - 3 > currentDay) && (rentFinalMonth === currentMonth || rentFinalMonth < currentMonth)){
+            item.read = false;
+            notificationMessages.push(item);
+        }
     }
   }
 }
