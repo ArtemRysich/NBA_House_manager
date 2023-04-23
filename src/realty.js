@@ -38,47 +38,44 @@ function onClick() {
     <div class='form-realty__input-block form-realty__input-block_row'>
       <label for="photo" class='form-realty__label'>Завантажте фото об'єкту*</label>
       <label for="photo" class='form-realty__image-btn'></label>
-      <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden>
+      <input type="file" name="realty-photo" id="photo" accept="image/png, image/jpeg" hidden required>
     </div>
 
     <div class="js-form-realty__preview form-realty__preview"></div>
 
     <div class='form-realty__input-block'>
     <label for="text" class='form-realty__label'>Назва вашого об'єкта*</label>
-    <input type="text" class='form-realty__input' name="realty-title" id="title">
+    <input type="text" class='form-realty__input' name="realty-title" id="title" required>
     </div>
 
     <div class='form-realty__input-block'>
       <label for="details" class='form-realty__label'>Опис об'єкту*</label>
-      <textarea class='form-realty__input' name="realty-details" id="details"></textarea>
+      <textarea class='form-realty__input' name="realty-details" id="details" required></textarea>
     </div>
 
     <div class='form-realty__input-block'>
       <label for="rooms" class='form-realty__label'>Кількість кімнат*</label>
-      <input type="number" class='form-realty__input' min="0" name="realty-rooms" id="rooms">
+      <input type="number" class='form-realty__input' min="0" name="realty-rooms" id="rooms" required>
     </div>
 
     <div class='form-realty__input-block'>
       <label for="area" class='form-realty__label'>Площа об'єкту м<sup>2</sup>*</label>
-      <input type="number" class='form-realty__input' min="0" name="realty-area" id="area">
+      <input type="number" class='form-realty__input' min="0" name="realty-area" id="area" required>
     </div>
 
     <div class='form-realty__input-block'>
       <label for="price" class='form-realty__label'>Вартість об'єкту*</label>
-      <input type="number" class='form-realty__input' min="0" name="realty-price" id="price">
+      <input type="number" class='form-realty__input' min="0" name="realty-price" id="price" required>
     </div>
 
     <div class='form-realty__input-block'>
       <label for="type" class='form-realty__label'>Тип пропозиції*</label>
-      <select name="realty-type" id="type" class='form-realty__select'>
-        <option value="Продаж">Активно</option>
-        <option value="Оренда">Продано</option>
-        <option value="Оренда">В оренді</option>
-        <option value="Оренда">Підготовлено до оренди</option>
-        <option value="Оренда">Архівовано</option>
+      <select name="realty-type" id="type" class='form-realty__select' required>
+        <option value="Оренда">Оренда</option>
+        <option value="Продаж">Продаж</option>
       </select>
     </div>
-    <button class='form-realty__create'>Створити об'єкт*</button>
+    <button class='form-realty__create'>Створити об'єкт</button>
   </form>`,
     {
       onShow: () => {
@@ -163,9 +160,11 @@ function addRealty(evt) {
     status: type.value === 'Продаж' ? 'В продажі' : 'Вільно',
   };
   console.log(data);
-  addToCollection(data).then(data => console.log(data)).catch(err => console.log(err));
+  addToCollection(data)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   this.close();
-//   list.innerHTML = createMarkup(realtyItems);
+  //   list.innerHTML = createMarkup(realtyItems);
 }
 
 (function () {

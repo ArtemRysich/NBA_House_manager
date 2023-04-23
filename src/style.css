@@ -867,3 +867,52 @@ h3{
 .filter__button:hover{
     background: rgb(36, 36, 159);
 }
+
+.logIn,
+.signIn{
+    max-width: 400px;
+    padding: 0 15px;
+}
+
+.logIn__input,
+.signIn__input{
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    border: none;
+    margin-bottom: 20px;
+    transition: all .4s ease 0s;
+}
+
+.logIn__input:focus,
+.signIn__input:focus{
+    box-shadow: 0px 0px 10px #fff;
+}
+
+.logIn__button,
+.signIn__button{
+    cursor: pointer;
+    padding: 15px 25px;
+    background: rgb(24, 24, 117);
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all .4s ease 0s;
+}
+
+.logIn__button:hover,
+.signIn__button:hover{
+    background: rgb(37, 37, 157);
+}
+
+.header__reg{
+    color: #fff;
+}
+
+.header__link{
+    cursor: pointer;
+}
