@@ -1,16 +1,14 @@
 import * as basicLightbox from 'basiclightbox';
-import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { v4 as uuidv4 } from 'uuid';
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 const notificationButton = document.querySelector('.notification');
 const LS_KEY = 'notificationMessages'
 
 let notificationMessages;
-
 if(localStorage.getItem(LS_KEY)){
     notificationMessages = localStorage.getItem(LS_KEY);
 }
-
 else{
     notificationMessages = [
         {
@@ -29,7 +27,7 @@ else{
 const notificationNumbres = document.querySelector('.notification__numbers');
 
 
-if(notificationMessages.length === 0){
+if(!notificationMessages.length){
     notificationNumbres.style.display = 'none';
 }
 else{

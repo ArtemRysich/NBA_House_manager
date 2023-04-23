@@ -2,7 +2,6 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
-
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const filter = document.querySelector('.js-filter');
 const filterRemoveBtn = document.querySelector('.js-filter-items-remove');
@@ -20,7 +19,9 @@ list.addEventListener('click', cardHandler);
 
 function handlerAddFilter(evt) {
   evt.preventDefault();
-  const {} = evt.currentTarget.elements;
+  const { filter } = evt.currentTarget.elements;
+  const filteredItems = realtyItems.filter(({status}) => status === filter.value);
+  list.innerHTML = createMarkup(filteredItems);
 }
 
 function handlerRemoveFilter() {
