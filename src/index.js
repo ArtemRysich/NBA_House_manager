@@ -20,9 +20,9 @@ function showSignUp() {
     <button>Зареєструватись</button>
   </form>
     `);
-  instance.show();
-  const signIn = document.querySelector('.js-signIn');
-  signIn.addEventListener('submit', onCreateUser);
+    instance.show()
+    const signIn = document.querySelector('.js-signIn');
+    signIn.addEventListener('submit', onCreateUser);
 }
 function showLogIn() {
   const instance = basicLightbox.create(`
@@ -34,10 +34,11 @@ function showLogIn() {
     <button>Увійт</button>
   </form>
   `);
-  instance.show();
+  instance.show()
   const logIn = document.querySelector('.js-logIn');
   logIn.addEventListener('submit', onLogInUser);
 }
+
 
 function onCreateUser(e) {
   e.preventDefault();
