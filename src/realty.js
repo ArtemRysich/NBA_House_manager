@@ -68,11 +68,10 @@ function onClick() {
     <div class='form-realty__input-block'>
       <label for="type" class='form-realty__label'>Тип пропозиції*</label>
       <select name="realty-type" id="type" class='form-realty__select'>
-        <option value="Продаж">Активно</option>
-        <option value="Оренда">Продано</option>
-        <option value="Оренда">В оренді</option>
-        <option value="Оренда">Підготовлено до оренди</option>
-        <option value="Оренда">Архівовано</option>
+        <option value="В продажу">В продажу</option>
+        <option value="Продано">Продано</option>
+        <option value="Вільно">Вільно</option>
+        <option value="В оренді">В оренді</option>
       </select>
     </div>
     <button class='form-realty__create'>Створити об'єкт*</button>

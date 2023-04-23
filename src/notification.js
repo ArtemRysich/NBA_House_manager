@@ -5,22 +5,6 @@ const notificationButton = document.querySelector('.notification');
 
 const realtyItems = JSON.parse(localStorage.getItem('realty-items'));
 
-/* const notificationMessages = realtyItems.map(item => {
-    const date = new Date();
-    let rentFinalDay = parseInt(item.rentTime.slice(8,10));
-    let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
-    let currentDay = date.getDate();
-    let currentMonth = date.getMonth();
-    if(rentFinalMonth < currentMonth && item){
-        item.read = false;
-        return item;
-    }
-    if((rentFinalDay - 3 > currentDay) && (rentFinalMonth === currentMonth || rentFinalMonth < currentMonth) && item){
-        item.read = false;
-        return item;
-    }
-}); */
-
 const notificationMessages = [];
 
 for(let i = 0; i < realtyItems.length; i++){
@@ -29,7 +13,7 @@ for(let i = 0; i < realtyItems.length; i++){
     let rentFinalDay = parseInt(item.rentTime.slice(8,10));
     let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
     let currentDay = date.getDate();
-    let currentMonth = date.getMonth() + 5;
+    let currentMonth = date.getMonth();
     if(rentFinalMonth < currentMonth){
         item.read = false;
         notificationMessages.push(item);
