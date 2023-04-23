@@ -2,6 +2,7 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
+
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
 
