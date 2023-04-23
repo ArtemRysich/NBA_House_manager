@@ -22,8 +22,8 @@ if (localStorage.getItem('Token')) {
 function showSignUp() {
   const instance = basicLightbox.create(`
   <form class="js-signIn signIn">
-    <input type="email" name="email" class='signIn__input' placeholder="Введіть емейл" />
-    <input type="password" class='signIn__input' name="password" placeholder="Введіть пароль" />
+    <input type="email" name="email" class='signIn__input' placeholder="Введіть емейл" required/>
+    <input type="password" class='signIn__input' name="password" placeholder="Введіть пароль" required/>
     <button class='signIn__button'>Зареєструватись</button>
   </form>
     `);
@@ -35,8 +35,8 @@ function showLogIn() {
   const instance = basicLightbox.create(
     `
     <form class="js-logIn logIn">
-    <input type="text" name="email" class='logIn__input' placeholder="Введіть емейл..." />
-    <input type="password" name="password" class='logIn__input' placeholder="Введіть пароль..." />
+    <input type="text" name="email" class='logIn__input' placeholder="Введіть емейл..." required/>
+    <input type="password" name="password" class='logIn__input' placeholder="Введіть пароль..." required/>
     <button class='logIn__button'>Увійти</button>
   </form>
   `,
