@@ -398,6 +398,7 @@ input::-webkit-inner-spin-button {
 }
 
 .main-objects__body{
+    height: 100%;
     width: 100%;
     cursor: pointer;
     box-shadow: 0px 0px 10px #ccc9c9;
@@ -716,7 +717,6 @@ h3{
     width: 120px;
     padding: 10px 15px;
     border: 3px groove rgb(15, 15, 54);
-    background: rgb(22, 22, 96);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -799,4 +799,71 @@ h3{
     background: red;
     border-radius: 10px;
     color: #fff;
+}
+
+.filter{
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-span{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.filter-block{
+    display: flex;
+}
+
+
+.filter-row{
+    display: flex;
+    margin-right: 40px;
+}
+
+.fitler-some-block{
+    display: flex;
+}
+
+@media all and (max-width: 670px) {
+    .fitler-some-block{
+        flex-direction: column;
+    }
+    .filter-row{
+        margin: 0 0 30px 0;
+    }
+}
+
+.filter__input{
+    display: block;
+    margin-right: 15px;
+}
+
+.filter__title{
+    font-size: 1.7rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.filter__buttons{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filter__button{
+    cursor: pointer;
+    transition: all .3s ease 0s;
+    padding: 15px;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgb(22, 22, 96);
+    font-size: 1rem;
+    margin-right: 15px;
+}
+
+.filter__button:hover{
+    background: rgb(36, 36, 159);
 }
