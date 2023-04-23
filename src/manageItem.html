@@ -9,6 +9,7 @@
   <script type="module" src="./manageItem.js"></script>
   <script type="module" src="header.js"></script>
   <link rel="stylesheet" href="basicLightBox.css">
+  <!-- <script type="module" src="./notification.js"></script> -->
   <title>House manager</title>
   <link rel="shortcut icon" href="img/favicon.png">
 </head>
@@ -31,6 +32,10 @@
             <li class="header__item">
               <a href="./realty.html" class="header__link">Мій кабінет</a>
             </li>
+            <li class="header__item notification">
+              <img src="img/notification.png" class="notification__image" alt="Notification">
+              <span class="notification__numbers">0</span>
+            </li>
           </ul>
         </nav>
         <div class="header__burger">
@@ -41,8 +46,8 @@
     <main class="main-manage">
       <div class="main-manage__container">
         <div class="js-container"></div>
+        <div class="js-timer main-manage__timer"></div>
       </div>
-      <div class="js-timer"></div>
     </main>
   </div>
 </body>

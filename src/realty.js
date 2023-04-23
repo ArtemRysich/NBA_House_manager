@@ -2,13 +2,13 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
+
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
 
 const realtyItems = JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
 const list = document.querySelector('.js-list');
 let img = null;
-
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
 function onClick() {
