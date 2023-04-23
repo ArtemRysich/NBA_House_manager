@@ -6,10 +6,15 @@ import { getCollection } from './services/collection/getCollection';
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const realtyItems = [];
 const list = document.querySelector('.js-list');
+const logout = document.querySelector('.js-logout');
 let img = null;
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
-
+logout.addEventListener('click', handlerLogout);
+function handlerLogout() {
+  localStorage.clear();
+  location.href = './index.html';
+}
 const filter = document.querySelector('.js-filter');
 const filterRemoveBtn = document.querySelector('.js-filter-items-remove');
 
@@ -26,14 +31,13 @@ function handlerAddFilter(evt) {
 }
 
 function handlerRemoveFilter() {
-    filter.reset();
-    getCollection().then(data => {
-        if (!data.length) {
-          return;
-        }
-        list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
-      });
-
+  filter.reset();
+  getCollection().then(data => {
+    if (!data.length) {
+      return;
+    }
+    list.insertAdjacentHTML('beforeend', createMarkup(realtyItems));
+  });
 }
 function onClick() {
   const instance = basicLightbox.create(
