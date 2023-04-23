@@ -2,7 +2,6 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
-
 const addRealtyBtn = document.querySelector('.js-add-realty');
 const LS_KEY = 'realty-items';
 
@@ -11,6 +10,17 @@ const list = document.querySelector('.js-list');
 let img = null;
 addRealtyBtn.addEventListener('click', onClick);
 list.addEventListener('click', cardHandler);
+function handlerAddFilter(evt) {
+  evt.preventDefault();
+  const { filter } = evt.currentTarget.elements;
+  const filteredItems = realtyItems.filter(({status}) => status === filter.value);
+  list.innerHTML = createMarkup(filteredItems);
+}
+
+function handlerRemoveFilter() {
+  filter.reset();
+  list.innerHTML = createMarkup(realtyItems);
+}
 function onClick() {
   const instance = basicLightbox.create(`
     <form action="submit" class="js-form-realty form-realty">

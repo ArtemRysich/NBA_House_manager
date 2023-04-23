@@ -8,16 +8,15 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="basicLightBox.css">
 
+  <script type="module" src="./notification.js"></script>
   <script type="module" src="./realty.js"></script>
-  <script src="https://kit.fontawesome.com/6feee529ab.js" crossorigin="anonymous"></script>
-<!--   <script type="module" src="./notification.js"></script> -->
   <script type="module" src="./header.js"></script>
+  <script src="https://kit.fontawesome.com/6feee529ab.js" crossorigin="anonymous"></script>
   <title>House manager</title>
   <link rel="shortcut icon" href="img/favicon.png">
 </head>
 
 <body>
-
   <div class="wrapper">
     <header class="header header_bg">
       <div class="header__container">
@@ -47,6 +46,37 @@
       </div>
     </header>
     <main class="main-objects">
+      <div>
+        <form action="submit" class="js-filter">
+          <h3>Фільтер пошуку</h3>
+          <div class='py'>
+            <div>
+              <span>Фільтр для продажу</span>
+              <label>
+                <input type="radio" class="option-input radio" name="filter" value="В продажі" />
+                В продажі
+              </label>
+              <label>
+                <input type="radio" class="option-input radio" name="filter" value="Продано" />
+                Продано
+              </label>
+            </div>
+            <div>
+              <span>Фільтр для оренди</span>
+              <label>
+                <input type="radio" class="option-input radio" name="filter" value="Вільно"/>
+                Вільно
+              </label>
+              <label>
+                <input type="radio" class="option-input radio" name="filter" value="Здано"/>
+                Здано
+              </label>
+            </div>
+          </div>
+          <button class="js-filter-items-add">Застосувати</button>
+        </form>
+        <button class="js-filter-items-remove">Скинути фільтер</button>
+      </div>
       <div class="main-objects__container">
         <div>
           <form action="submit" class="js-filter filter">
