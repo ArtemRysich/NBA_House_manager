@@ -167,7 +167,6 @@ function onSaveAction(evt) {
     const month = time.getMonth();
     time.setMonth(month !== 11 ? month + 1 : 0);
     rentTime = time;
-    console.log('tyt', rentTime);
   }
 
   const data = {
@@ -205,7 +204,6 @@ function onLoad() {
 }
 
 function startTimer(time) {
-  console.log(time);
   if (!time) {
     return;
   }

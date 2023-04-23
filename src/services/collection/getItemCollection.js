@@ -1,6 +1,5 @@
 async function getItmCollection(id) {
   const token = localStorage.getItem('Token');
-  console.log(token);
   const options = {
     method: 'GET',
     headers: {

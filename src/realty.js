@@ -108,7 +108,6 @@ function cardHandler(evt) {
     return;
   }
   const { id } = evt.target.closest('.js-realty-item').dataset;
-  console.log(id);
   const { title, photo, details, price, area, rooms, type, status } =
     realtyItems.find(({ id: currentId }) => currentId === Number(id));
   const instance =
@@ -165,7 +164,6 @@ function addRealty(evt) {
     type: type.value,
     status: type.value === 'Продаж' ? 'В продажі' : 'Вільно',
   };
-  console.log(data);
   addToCollection(data)
     .then(resp => {
       realtyItems.push(resp);
