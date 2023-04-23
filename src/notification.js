@@ -14,7 +14,7 @@ for(let i = 0; i < realtyItems.length; i++){
         let rentFinalDay = parseInt(item.rentTime.slice(8,10));
         let rentFinalMonth = parseInt(item.rentTime.slice(5,7));
         let currentDay = date.getDate();
-        let currentMonth = date.getMonth() + 4;
+        let currentMonth = date.getMonth();
         if(rentFinalMonth < currentMonth){
             item.read = false;
             notificationMessages.push(item);
@@ -29,9 +29,11 @@ for(let i = 0; i < realtyItems.length; i++){
 const notificationNumbres = document.querySelector('.notification__numbers');
 
 if(!notificationMessages.length){
+    console.log(1)
     notificationNumbres.style.display = 'none';
 }
 else{
+    console.log(2)
     notificationNumbres.style.display = '';
     notificationNumbres.innerHTML = notificationMessages.length;
 }
